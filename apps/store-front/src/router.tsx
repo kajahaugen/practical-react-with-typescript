@@ -5,6 +5,7 @@ import { MainLayout } from "@prwt/layouts"
 
 import { Bootstrap } from "./Bootstrap"
 import { Nav } from "./Nav"
+import { ClickUntilPage } from "./pages/ClickUntilPage"
 import { ErrorPage } from "./pages/ErrorPage"
 import { LoaderPage } from "./pages/LoaderPage"
 import { LongPage } from "./pages/LongPage"
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
 			{
 				path: "long",
 				element: <LongPage />
+			},
+			{
+				path: "clickUntil",
+				element: <ClickUntilPage />
 			}
 		]
 	}
