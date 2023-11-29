@@ -1,5 +1,8 @@
-import { BooleanField, NumericField, TextField } from "@prwt/fields"
 import { useState } from "react"
+
+import { BooleanField, NumericField, TextField } from "@prwt/fields"
+
+import { ClickUntil } from "../ClickUntil"
 
 export const FieldsPage = () => {
 	const [textValue, setTextValue] = useState<string>()
@@ -21,6 +24,7 @@ export const FieldsPage = () => {
 				value={useRangeForNumberField}
 				onChange={setUseRangeForNumberField}
 			/>
+			<ClickUntil limitMessage={textValue} limit={numberValue} />
 		</>
 	)
 }
