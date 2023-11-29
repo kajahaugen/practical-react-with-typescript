@@ -4,9 +4,7 @@ import { BooleanField, NumericField, TextField } from "@prwt/fields"
 
 import { ClickUntil } from "./ClickUntil"
 
-export interface ClickUntilFormProps {}
-
-export const ClickUntilForm = (props: ClickUntilFormProps) => {
+export const ClickUntilForm = () => {
 	const [message, setMessage] = useState("Limit reached")
 	const [limit, setLimit] = useState(15)
 	const [bypassLimit, setBypassLimit] = useState(false)
