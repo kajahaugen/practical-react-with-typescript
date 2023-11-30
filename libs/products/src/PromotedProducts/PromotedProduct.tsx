@@ -3,6 +3,8 @@ import styled from "@emotion/styled"
 import { Product } from "../products"
 
 const ListItem = styled.li`
+	flex: 0 0 0;
+	width: 0;
 	padding: 12px;
 	border-radius: 4px;
 	margin: 8px;
