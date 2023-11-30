@@ -11,6 +11,7 @@ const Container = styled.div<ContainerStyleProps>`
 	border-radius: 16px;
 	margin: 8px;
 	padding: ${({ borderSize }) => borderSize}px;
+	box-shadow: 0 0 10px #535353;
 
 	@keyframes move {
 		0% {
@@ -27,7 +28,8 @@ const Container = styled.div<ContainerStyleProps>`
 const InnerContainer = styled.div`
 	background-color: #fff;
 	border-radius: 8px;
-	padding: 4px;
+	padding: 8px 12px;
+	box-shadow: inset 0 0 10px #000000;
 `
 
 export interface EmphasizeProps {
