@@ -1,16 +1,13 @@
 import styled from "@emotion/styled"
 import { ReactNode } from "react"
 
-interface ContainerStyleProps {
-	borderSize: number
-}
-const Container = styled.div<ContainerStyleProps>`
+const Container = styled.div`
 	background: linear-gradient(270deg, #132ca9, #bc1411);
 	background-size: 400% 400%;
 	animation: move 1s ease infinite;
 	border-radius: 16px;
 	margin: 8px;
-	padding: ${({ borderSize }) => borderSize}px;
+	padding: 16px;
 	box-shadow: 0 0 10px #535353;
 
 	@keyframes move {
@@ -33,13 +30,12 @@ const InnerContainer = styled.div`
 `
 
 export interface EmphasizeProps {
-	borderSize?: number
 	children: ReactNode
 }
 
-export const Emphasize = ({ borderSize = 16, children }: EmphasizeProps) => {
+export const Emphasize = ({ children }: EmphasizeProps) => {
 	return (
-		<Container borderSize={borderSize}>
+		<Container>
 			<InnerContainer>{children}</InnerContainer>
 		</Container>
 	)
