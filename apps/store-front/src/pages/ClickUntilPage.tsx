@@ -1,4 +1,4 @@
-import { ClickUntilForm } from "../ClickUntil"
+import { ClickUntilForm } from "../tasks"
 
 export const ClickUntilPage = () => {
 	return <ClickUntilForm />

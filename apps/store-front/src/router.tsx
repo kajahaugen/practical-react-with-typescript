@@ -10,6 +10,7 @@ import { ErrorPage } from "./pages/ErrorPage"
 import { LoaderPage } from "./pages/LoaderPage"
 import { LongPage } from "./pages/LongPage"
 import { ProductsTablePage } from "./pages/ProductsTablePage"
+import { TogglePage } from "./pages/TogglePage"
 
 const FieldsPage = lazy(async () => ({
 	default: (await import("./pages/FieldsPage")).FieldsPage
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
 			{
 				path: "productsTable",
 				element: <ProductsTablePage />
+			},
+			{
+				path: "toggle",
+				element: <TogglePage />
 			}
 		]
 	}
