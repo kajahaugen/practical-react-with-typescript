@@ -7,6 +7,7 @@ import { Bootstrap } from "./Bootstrap"
 import { Nav } from "./Nav"
 import { ClickUntilPage } from "./pages/ClickUntilPage"
 import { ErrorPage } from "./pages/ErrorPage"
+import { HomePage } from "./pages/HomePage"
 import { LoaderPage } from "./pages/LoaderPage"
 import { LongPage } from "./pages/LongPage"
 import { ProductsTablePage } from "./pages/ProductsTablePage"
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <h1>Hello world</h1>
+				element: <HomePage />
 			},
 			{
 				path: "fields",
