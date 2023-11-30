@@ -15,7 +15,7 @@ export const Nav = () => {
 			<StyledLink to="/fields">Fields</StyledLink>
 			<StyledLink to="/loader">Loader</StyledLink>
 			<StyledLink to="/clickUntil">Click Until Form</StyledLink>
-			<StyledLink to="/not-found">Not found</StyledLink>
+			<StyledLink to="/productsTable">Products table</StyledLink>
 		</>
 	)
 }

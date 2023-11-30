@@ -9,6 +9,7 @@ import { ClickUntilPage } from "./pages/ClickUntilPage"
 import { ErrorPage } from "./pages/ErrorPage"
 import { LoaderPage } from "./pages/LoaderPage"
 import { LongPage } from "./pages/LongPage"
+import { ProductsTablePage } from "./pages/ProductsTablePage"
 
 const FieldsPage = lazy(async () => ({
 	default: (await import("./pages/FieldsPage")).FieldsPage
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
 			{
 				path: "clickUntil",
 				element: <ClickUntilPage />
+			},
+			{
+				path: "productsTable",
+				element: <ProductsTablePage />
 			}
 		]
 	}
