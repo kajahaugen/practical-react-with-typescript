@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { Link } from "react-router-dom"
 
 import { Product } from "../products"
 
@@ -9,23 +10,30 @@ const ListItem = styled.li`
 	border-radius: 4px;
 	margin: 8px;
 	box-shadow: 0 0 4px #909090;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	overflow: hidden;
+
 	&:hover {
 		background: #f0f0f0;
 	}
 
-	img {
-		display: block;
-	}
+	a {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		color: inherit;
+		text-decoration: none;
+		height: 100%;
 
-	div {
-		text-align: center;
-		padding-top: 8px;
-		&:last-child {
-			margin-top: auto;
+		img {
+			display: block;
+		}
+
+		div {
+			text-align: center;
+			padding-top: 8px;
+			&:last-child {
+				margin-top: auto;
+			}
 		}
 	}
 `
@@ -38,9 +46,11 @@ export const PromotedProduct = ({ product }: PromotedProductProps) => {
 	const imageUrl = `https://picsum.photos/seed/${product.id}/600/200`
 	return (
 		<ListItem>
-			<img src={imageUrl} alt="Product" />
-			<div>{product.title}</div>
-			<div>{product.price} NOK</div>
+			<Link to={`/product/${product.id}`}>
+				<img src={imageUrl} alt="Product" />
+				<div>{product.title}</div>
+				<div>{product.price} NOK</div>
+			</Link>
 		</ListItem>
 	)
 }
