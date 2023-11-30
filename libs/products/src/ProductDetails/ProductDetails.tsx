@@ -23,6 +23,7 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
 				src={getProductImageUrl(product, { width: 600, height: 200 })}
 				alt="Product"
 			/>
+			<p>{description}</p>
 			<dl>
 				<dt>Price</dt>
 				<dd>{price} NOK</dd>
@@ -33,7 +34,6 @@ export const ProductDetails = ({ product }: ProductDetailsProps) => {
 					{rating} ({nrOfRatings})
 				</dd>
 			</dl>
-			<p>{description}</p>
 		</div>
 	)
 }

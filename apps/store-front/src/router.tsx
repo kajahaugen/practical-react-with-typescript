@@ -11,7 +11,7 @@ import { HomePage } from "./pages/HomePage"
 import { LoaderPage } from "./pages/LoaderPage"
 import { LongPage } from "./pages/LongPage"
 import { ProductDetailsPage } from "./pages/ProductDetailsPage"
-import { ProductsTablePage } from "./pages/ProductsTablePage"
+import { ProductsPage } from "./pages/ProductsPage"
 import { TogglePage } from "./pages/TogglePage"
 
 const FieldsPage = lazy(async () => ({
@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
 				children: [
 					{
 						index: true,
-						element: <ProductsTablePage />
+						element: <ProductsPage />
 					},
 					{
 						path: ":productId",
