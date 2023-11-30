@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import { Link } from "react-router-dom"
 
+import { getProductImageUrl } from "../getProductImage"
 import { Product } from "../products"
 
 const ListItem = styled.li`
@@ -43,11 +44,13 @@ export interface PromotedProductProps {
 }
 
 export const PromotedProduct = ({ product }: PromotedProductProps) => {
-	const imageUrl = `https://picsum.photos/seed/${product.id}/600/200`
 	return (
 		<ListItem>
-			<Link to={`/product/${product.id}`}>
-				<img src={imageUrl} alt="Product" />
+			<Link to={`/products/${product.id}`}>
+				<img
+					src={getProductImageUrl(product, { width: 600, height: 200 })}
+					alt="Product"
+				/>
 				<div>{product.title}</div>
 				<div>{product.price} NOK</div>
 			</Link>

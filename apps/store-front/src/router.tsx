@@ -10,6 +10,7 @@ import { ErrorPage } from "./pages/ErrorPage"
 import { HomePage } from "./pages/HomePage"
 import { LoaderPage } from "./pages/LoaderPage"
 import { LongPage } from "./pages/LongPage"
+import { ProductDetailsPage } from "./pages/ProductDetailsPage"
 import { ProductsTablePage } from "./pages/ProductsTablePage"
 import { TogglePage } from "./pages/TogglePage"
 
@@ -53,8 +54,17 @@ export const router = createBrowserRouter([
 				element: <ClickUntilPage />
 			},
 			{
-				path: "productsTable",
-				element: <ProductsTablePage />
+				path: "products",
+				children: [
+					{
+						index: true,
+						element: <ProductsTablePage />
+					},
+					{
+						path: ":productId",
+						element: <ProductDetailsPage />
+					}
+				]
 			},
 			{
 				path: "toggle",
