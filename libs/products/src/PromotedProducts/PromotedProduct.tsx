@@ -5,13 +5,14 @@ import { Product } from "../products"
 const ListItem = styled.li`
 	flex: 0 0 0;
 	width: 0;
-	padding: 12px;
+	padding: 0px 12px 12px;
 	border-radius: 4px;
 	margin: 8px;
 	box-shadow: 0 0 4px #909090;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	overflow: hidden;
 	&:hover {
 		background: #f0f0f0;
 	}
@@ -34,7 +35,7 @@ export interface PromotedProductProps {
 }
 
 export const PromotedProduct = ({ product }: PromotedProductProps) => {
-	const imageUrl = `https://picsum.photos/seed/${product.id}/200/100`
+	const imageUrl = `https://picsum.photos/seed/${product.id}/600/200`
 	return (
 		<ListItem>
 			<img src={imageUrl} alt="Product" />
