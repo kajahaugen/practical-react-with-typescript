@@ -4,9 +4,13 @@ import { Product } from "../products"
 
 export interface ProductsTableRowProps {
 	product: Product
+	onDelete: () => unknown
 }
 
-export const ProductsTableRow = ({ product }: ProductsTableRowProps) => {
+export const ProductsTableRow = ({
+	product,
+	onDelete
+}: ProductsTableRowProps) => {
 	const { title, price, category, rating, nrOfRatings } = product
 	return (
 		<tr>
@@ -17,6 +21,9 @@ export const ProductsTableRow = ({ product }: ProductsTableRowProps) => {
 			<td>{category}</td>
 			<td>
 				{rating} ({nrOfRatings})
+			</td>
+			<td>
+				<button onClick={onDelete}>Delete</button>
 			</td>
 		</tr>
 	)

@@ -19,9 +19,10 @@ const getSortIcon = (
 
 export interface ProductsTableProps {
 	products: Product[]
+	onDelete: (product: Product) => unknown
 }
 
-export const ProductsTable = ({ products }: ProductsTableProps) => {
+export const ProductsTable = ({ products, onDelete }: ProductsTableProps) => {
 	const [sortBy, setSortBy] = useState<SortBy>()
 	const [sortDirection, setSortDirection] = useState<SortDirection>("asc")
 
@@ -51,6 +52,10 @@ export const ProductsTable = ({ products }: ProductsTableProps) => {
 
 		return productsToSort
 	}, [products, sortBy, sortDirection])
+
+	const deleteProduct = (product: Product) => () => {
+		onDelete(product)
+	}
 
 	const changeSortBy = (newSortBy: SortBy) => () => {
 		if (sortBy === newSortBy) {
@@ -89,11 +94,16 @@ export const ProductsTable = ({ products }: ProductsTableProps) => {
 					>
 						Rating {getSortIcon("rating", sortDirection, sortBy)}
 					</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				{sortedProducts.map((product) => (
-					<ProductsTableRow key={product.id} product={product} />
+					<ProductsTableRow
+						key={product.id}
+						product={product}
+						onDelete={deleteProduct(product)}
+					/>
 				))}
 			</tbody>
 		</table>
