@@ -1,6 +1,8 @@
 import styled from "@emotion/styled"
 import { ChangeEvent, useId } from "react"
 
+import { useFieldsService } from "../FieldsService"
+
 const Container = styled.div`
 	display: flex;
 	align-items: center;
@@ -23,6 +25,7 @@ export const BooleanField = ({
 	label
 }: BooleanFieldProps) => {
 	const id = useId()
+	const { isDisabled } = useFieldsService()
 
 	const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
 		onChange(evt.target.checked)
@@ -30,7 +33,13 @@ export const BooleanField = ({
 
 	return (
 		<Container>
-			<input id={id} type="checkbox" checked={value} onChange={onInputChange} />
+			<input
+				id={id}
+				type="checkbox"
+				checked={value}
+				onChange={onInputChange}
+				disabled={isDisabled}
+			/>
 			<Label htmlFor={id}>{label}</Label>
 		</Container>
 	)

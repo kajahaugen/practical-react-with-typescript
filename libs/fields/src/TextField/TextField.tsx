@@ -1,6 +1,8 @@
 import styled from "@emotion/styled"
 import { ChangeEvent, useId } from "react"
 
+import { useFieldsService } from "../FieldsService"
+
 const Container = styled.div`
 	padding: 4px;
 `
@@ -28,6 +30,7 @@ export const TextField = ({
 	isPassword = false
 }: TextFieldProps) => {
 	const id = useId()
+	const { isDisabled } = useFieldsService()
 
 	const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
 		onChange(evt.target.value)
@@ -40,6 +43,7 @@ export const TextField = ({
 				id={id}
 				type={isPassword ? "password" : "text"}
 				value={value}
+				disabled={isDisabled}
 				onChange={onInputChange}
 			/>
 		</Container>

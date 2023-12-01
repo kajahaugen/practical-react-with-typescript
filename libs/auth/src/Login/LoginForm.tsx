@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 
-import { TextField } from "@prwt/fields"
+import { TextField, useFieldsService } from "@prwt/fields"
 
 const Container = styled.div`
 	background: linear-gradient(270deg, #132ca9, #bc1411);
@@ -43,24 +43,32 @@ export interface LoginFormProps {
 export const LoginForm = ({ onLogin }: LoginFormProps) => {
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
+	const { isDisabled } = useFieldsService()
 
-	const login = () => {
+	const submitLoginForm = (evt: FormEvent) => {
+		evt.preventDefault()
 		onLogin(username, password)
 	}
 
 	return (
 		<Container>
 			<InnerContainer>
-				<TextField label="User name" value={username} onChange={setUsername} />
-				<TextField
-					label="Password"
-					value={password}
-					onChange={setPassword}
-					isPassword
-				/>
-				<Controls>
-					<button onClick={login}>Login</button>
-				</Controls>
+				<form onSubmit={submitLoginForm}>
+					<TextField
+						label="User name"
+						value={username}
+						onChange={setUsername}
+					/>
+					<TextField
+						label="Password"
+						value={password}
+						onChange={setPassword}
+						isPassword
+					/>
+					<Controls>
+						<button disabled={isDisabled}>Login</button>
+					</Controls>
+				</form>
 			</InnerContainer>
 		</Container>
 	)

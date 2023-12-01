@@ -18,7 +18,6 @@ import { AppModule } from "./app"
 import { HttpExceptionFilter } from "./exceptions"
 import { setupOpenApi } from "./openApi"
 
-
 async function bootstrap(args: string[]) {
 	const [, , openApiArg = ""] = args
 	const app = await NestFactory.create<NestFastifyApplication>(
@@ -40,7 +39,7 @@ async function bootstrap(args: string[]) {
 		process.exit(0)
 	}
 
-	const port = process.env.PORT || 4210
+	const port = process.env.PORT || 4211
 	await app.listen(port)
 	Logger.log(`🚀 Application is running on: http://localhost:${port}`)
 }

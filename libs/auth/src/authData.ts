@@ -20,8 +20,10 @@ export const useMutateLogin = () => {
 	const { authClient } = useStoreService()
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: (login: ILoginRequest) =>
-			authClient.login(new LoginRequest(login)),
+		mutationFn: async (login: ILoginRequest) => {
+			await new Promise((resolve) => setTimeout(resolve, 2000))
+			return authClient.login(new LoginRequest(login))
+		},
 		onSuccess: (data) => {
 			queryClient.setQueryData(authKeys.session(), data)
 		}

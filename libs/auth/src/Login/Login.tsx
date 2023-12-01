@@ -1,12 +1,18 @@
+import { ProvideFieldsService } from "@prwt/fields"
+
 import { useMutateLogin } from "../authData"
 
 import { LoginForm } from "./LoginForm"
 
 export const Login = () => {
-	const { mutate } = useMutateLogin()
+	const { mutate, isPending } = useMutateLogin()
 	const onLogin = (username: string, password: string) => {
 		mutate({ username, password })
 	}
 
-	return <LoginForm onLogin={onLogin} />
+	return (
+		<ProvideFieldsService disabled={isPending}>
+			<LoginForm onLogin={onLogin} />
+		</ProvideFieldsService>
+	)
 }
