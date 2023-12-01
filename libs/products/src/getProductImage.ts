@@ -1,4 +1,4 @@
-import { Product } from "./products"
+import { Product } from "@prwt/generated/store-api"
 
 export interface ProductImageDimensions {
 	width: number

@@ -1,6 +1,6 @@
 import { useMemo, useState, MouseEvent } from "react"
 
-import { Product } from "../products"
+import { Product } from "@prwt/generated/store-api"
 
 const getSortDirectionText = (sortDirection?: "asc" | "desc") => {
 	switch (sortDirection) {

@@ -1,8 +1,9 @@
 import styled from "@emotion/styled"
 import { Link } from "react-router-dom"
 
+import { Product } from "@prwt/generated/store-api"
+
 import { getProductImageUrl } from "../getProductImage"
-import { Product } from "../products"
 
 const ListItem = styled.li`
 	flex: 0 0 0;

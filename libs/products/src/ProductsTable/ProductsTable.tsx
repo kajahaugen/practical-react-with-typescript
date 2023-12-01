@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react"
 
-import { Product } from "../products"
+import { Product } from "@prwt/generated/store-api"
 
 import { ProductsTableRow } from "./ProductsTableRow"
 
@@ -43,7 +43,7 @@ export const ProductsTable = ({ products, onDelete }: ProductsTableProps) => {
 					result = a.price - b.price
 					break
 				case "rating":
-					result = a.rating - b.rating
+					result = (a?.rating ?? 0) - (b.rating ?? 0)
 					break
 			}
 

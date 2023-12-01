@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import { Product } from "../products"
+import { Product } from "@prwt/generated/store-api"
 
 export interface ProductsTableRowProps {
 	product: Product
