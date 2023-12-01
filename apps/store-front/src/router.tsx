@@ -9,6 +9,7 @@ import { ClickUntilPage } from "./pages/ClickUntilPage"
 import { ErrorPage } from "./pages/ErrorPage"
 import { HomePage } from "./pages/HomePage"
 import { LoaderPage } from "./pages/LoaderPage"
+import { LoginPage } from "./pages/LoginPage"
 import { LongPage } from "./pages/LongPage"
 import { ProductDetailsPage } from "./pages/ProductDetailsPage"
 import { ProductsPage } from "./pages/ProductsPage"
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
 			{
 				index: true,
 				element: <HomePage />
+			},
+			{
+				path: "login",
+				element: <LoginPage />
 			},
 			{
 				path: "fields",

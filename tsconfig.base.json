@@ -20,10 +20,12 @@
 		"noFallthroughCasesInSwitch": true,
 		"baseUrl": ".",
 		"paths": {
+			"@prwt/auth": ["libs/auth/src/index.ts"],
 			"@prwt/fields": ["libs/fields/src/index.ts"],
 			"@prwt/generated/store-api": ["libs/generated/store-api/index.ts"],
 			"@prwt/layouts": ["libs/layouts/src/index.ts"],
-			"@prwt/products": ["libs/products/src/index.ts"]
+			"@prwt/products": ["libs/products/src/index.ts"],
+			"@prwt/store-service": ["libs/store-service/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]
