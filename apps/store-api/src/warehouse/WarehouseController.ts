@@ -5,7 +5,6 @@ import {
 	Controller,
 	Get,
 	Inject,
-	NotFoundException,
 	Param,
 	Put,
 	UseGuards
@@ -13,7 +12,6 @@ import {
 import {
 	ApiBadRequestResponse,
 	ApiBearerAuth,
-	ApiNotFoundResponse,
 	ApiOkResponse,
 	ApiOperation,
 	ApiTags
@@ -23,7 +21,7 @@ import { z } from "zod"
 import { ZodGuard, ZodGuardBody } from "../ZodGuard"
 import { bearerAuthName } from "../auth"
 import { AuthGuard, RequireRoles } from "../auth"
-import { BadRequestHttpProblem, HttpProblemResponse } from "../exceptions"
+import { BadRequestHttpProblem } from "../exceptions"
 
 import {
 	InventoryResult as InventoryResultModel,
@@ -53,19 +51,16 @@ export class WarehouseController {
 		description: "The result of the inventory ",
 		type: InventoryResult
 	})
-	@ApiNotFoundResponse({
-		description: "No inventory for the specified product",
-		type: HttpProblemResponse
-	})
-	public async getInventory(@Param("productId") productId: string) {
+	public async getInventory(
+		@Param("productId") productId: string
+	): Promise<InventoryResultModel> {
 		const inventory = await this.warehouseService.getInventoryForProduct(
 			productId
 		)
-		if (!inventory)
-			throw new NotFoundException(
-				`Product with id ${productId} has no inventory`
-			)
-		return inventory
+		return {
+			productId,
+			count: inventory?.count ?? 0
+		}
 	}
 
 	@Put("inventory/:productId")

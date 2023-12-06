@@ -1,5 +1,11 @@
 import styled from "@emotion/styled"
 
+const Container = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+`
 const Spinner = styled.div`
 	display: inline-block;
 	position: relative;
@@ -89,15 +95,17 @@ const Spinner = styled.div`
 
 export const DefaultLoader = () => {
 	return (
-		<Spinner>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</Spinner>
+		<Container>
+			<Spinner>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</Spinner>
+		</Container>
 	)
 }

@@ -5,9 +5,15 @@ import { MainLayout } from "@prwt/layouts"
 
 import { Bootstrap } from "./Bootstrap"
 import { Nav } from "./Nav"
+import { ClickUntilPage } from "./pages/ClickUntilPage"
 import { ErrorPage } from "./pages/ErrorPage"
+import { HomePage } from "./pages/HomePage"
 import { LoaderPage } from "./pages/LoaderPage"
+import { LoginPage } from "./pages/LoginPage"
 import { LongPage } from "./pages/LongPage"
+import { ProductDetailsPage } from "./pages/ProductDetailsPage"
+import { ProductsPage } from "./pages/ProductsPage"
+import { TogglePage } from "./pages/TogglePage"
 
 const FieldsPage = lazy(async () => ({
 	default: (await import("./pages/FieldsPage")).FieldsPage
@@ -30,7 +36,11 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <h1>Hello world</h1>
+				element: <HomePage />
+			},
+			{
+				path: "login",
+				element: <LoginPage />
 			},
 			{
 				path: "fields",
@@ -43,6 +53,27 @@ export const router = createBrowserRouter([
 			{
 				path: "long",
 				element: <LongPage />
+			},
+			{
+				path: "clickUntil",
+				element: <ClickUntilPage />
+			},
+			{
+				path: "products",
+				children: [
+					{
+						index: true,
+						element: <ProductsPage />
+					},
+					{
+						path: ":productId",
+						element: <ProductDetailsPage />
+					}
+				]
+			},
+			{
+				path: "toggle",
+				element: <TogglePage />
 			}
 		]
 	}

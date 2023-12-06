@@ -17,6 +17,7 @@ const Container = styled.div`
 `
 const Nav = styled.nav`
 	flex: 0 0 150px;
+	padding: 8px;
 `
 const Main = styled.main`
 	flex: 1 1 auto;

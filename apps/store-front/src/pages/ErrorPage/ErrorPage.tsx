@@ -1,4 +1,5 @@
 import { Link, isRouteErrorResponse, useRouteError } from "react-router-dom"
+
 import { RouteErrorPage } from "./RouteErrorPage"
 
 export const ErrorPage = () => {
@@ -11,8 +12,13 @@ export const ErrorPage = () => {
 	console.error(error)
 	return (
 		<p>
-			An error has occurred. Take the <Link to="/">🚁</Link> back to the home
-			page and try again.
+			An error has occurred. Take the{" "}
+			<Link to="/">
+				<span role="img" aria-label="Helicopter">
+					🚁
+				</span>
+			</Link>{" "}
+			back to the home page and try again.
 		</p>
 	)
 }

@@ -1,5 +1,6 @@
-import { BooleanField, NumericField, TextField } from "@prwt/fields"
 import { useState } from "react"
+
+import { BooleanField, NumericField, TextField } from "@prwt/fields"
 
 export const FieldsPage = () => {
 	const [textValue, setTextValue] = useState<string>()

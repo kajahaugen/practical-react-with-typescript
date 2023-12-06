@@ -1,4 +1,4 @@
-import { ErrorResponse, Link, useNavigate } from "react-router-dom"
+import { ErrorResponse, useNavigate } from "react-router-dom"
 
 export interface RouteErrorPageProps {
 	routeError: ErrorResponse
