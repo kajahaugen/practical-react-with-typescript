@@ -1,7 +1,5 @@
-import { PromotedProducts, productResults } from "@prwt/products"
-
-const promotedProducts = productResults.results.slice(0, 3)
+import { PromotedProducts } from "@prwt/products"
 
 export const HomePage = () => {
-	return <PromotedProducts products={promotedProducts} />
+	return <PromotedProducts products={[]} />
 }

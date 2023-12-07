@@ -1,9 +1,13 @@
 import { createContext, useContext, useMemo } from "react"
 
-import { AuthControllerClient } from "@prwt/generated/store-api"
+import {
+	AuthControllerClient,
+	ProductsControllerClient
+} from "@prwt/generated/store-api"
 
 export interface StoreServiceContextProps {
 	authClient: AuthControllerClient
+	productsClient: ProductsControllerClient
 }
 
 const StoreServiceContext = createContext<StoreServiceContextProps | undefined>(
@@ -28,7 +32,8 @@ export const ProvideStoreService = ({
 }: ProvideStoreServiceProps) => {
 	const value = useMemo((): StoreServiceContextProps => {
 		return {
-			authClient: new AuthControllerClient(baseUrl)
+			authClient: new AuthControllerClient(baseUrl),
+			productsClient: new ProductsControllerClient(baseUrl)
 		}
 	}, [baseUrl])
 	return (

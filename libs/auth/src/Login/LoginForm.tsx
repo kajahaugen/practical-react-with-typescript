@@ -38,9 +38,10 @@ const Controls = styled.div`
 
 export interface LoginFormProps {
 	onLogin: (username: string, password: string) => unknown
+	onCancel: () => unknown
 }
 
-export const LoginForm = ({ onLogin }: LoginFormProps) => {
+export const LoginForm = ({ onLogin, onCancel }: LoginFormProps) => {
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
 	const { isDisabled } = useFieldsService()
@@ -48,6 +49,9 @@ export const LoginForm = ({ onLogin }: LoginFormProps) => {
 	const submitLoginForm = (evt: FormEvent) => {
 		evt.preventDefault()
 		onLogin(username, password)
+	}
+	const cancelLogin = () => {
+		onCancel()
 	}
 
 	return (
@@ -67,6 +71,9 @@ export const LoginForm = ({ onLogin }: LoginFormProps) => {
 					/>
 					<Controls>
 						<button disabled={isDisabled}>Login</button>
+						<button type="reset" onClick={cancelLogin}>
+							Cancel
+						</button>
 					</Controls>
 				</form>
 			</InnerContainer>

@@ -16,6 +16,7 @@ import {
 import {
 	ApiBadRequestResponse,
 	ApiBearerAuth,
+	ApiExtraModels,
 	ApiNotFoundResponse,
 	ApiOkResponse,
 	ApiOperation,
@@ -40,10 +41,8 @@ import {
 class GetProductsOptions extends createZodDto(
 	extendApi(GetProductsOptionsModel)
 ) {}
-class GetProductsResult extends createZodDto(
-	extendApi(GetProductsResultModel)
-) {}
-class Product extends createZodDto(extendApi(ProductModel)) {}
+class GetProductsResult extends createZodDto(GetProductsResultModel) {}
+class Product extends createZodDto(ProductModel) {}
 class NewProduct extends createZodDto(extendApi(NewProductModel)) {}
 class UpdateProduct extends createZodDto(extendApi(UpdateProductModel)) {}
 
@@ -61,13 +60,16 @@ export class ProductsController {
 
 	@Get()
 	@ApiOperation({
-		summary: "Get all products"
+		summary: "Get products using a query",
+		description:
+			"Get a list of paginated products from the API using a set of query parameters. The model for the query parameter is exported as GetProductsOptions"
 	})
 	@ApiOkResponse({
 		type: GetProductsResult
 	})
+	@ApiExtraModels(GetProductsOptions)
 	@ZodGuardQuery(GetProductsOptions)
-	public async listAll(@Query() query: GetProductsOptions) {
+	public async getProducts(@Query() query: GetProductsOptions) {
 		return this.productsService.getProducts(query)
 	}
 

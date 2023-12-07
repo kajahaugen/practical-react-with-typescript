@@ -464,7 +464,7 @@ export class AuthControllerClient implements IAuthControllerClient {
 export interface IProductsControllerClient {
 
     /**
-     * Get all products
+     * Get products using a query
      * @param query (optional) A short text to search for in either the title, description or category.
      * @param category (optional) 
      * @param count (optional) 
@@ -472,7 +472,7 @@ export interface IProductsControllerClient {
      * @param sortBy (optional) 
      * @param sortDirection (optional) 
      */
-    listAll(query?: string | undefined, category?: Category | undefined, count?: number | undefined, offset?: number | null | undefined, sortBy?: SortBy | undefined, sortDirection?: SortDirection | undefined): Promise<GetProductsResult>;
+    getProducts(query?: string | undefined, category?: Category | undefined, count?: number | undefined, offset?: number | null | undefined, sortBy?: SortBy | undefined, sortDirection?: SortDirection | undefined): Promise<GetProductsResult>;
 
     /**
      * Create a new product
@@ -503,7 +503,7 @@ export class ProductsControllerClient implements IProductsControllerClient {
     }
 
     /**
-     * Get all products
+     * Get products using a query
      * @param query (optional) A short text to search for in either the title, description or category.
      * @param category (optional) 
      * @param count (optional) 
@@ -511,7 +511,7 @@ export class ProductsControllerClient implements IProductsControllerClient {
      * @param sortBy (optional) 
      * @param sortDirection (optional) 
      */
-    listAll(query?: string | undefined, category?: Category | undefined, count?: number | undefined, offset?: number | null | undefined, sortBy?: SortBy | undefined, sortDirection?: SortDirection | undefined): Promise<GetProductsResult> {
+    getProducts(query?: string | undefined, category?: Category | undefined, count?: number | undefined, offset?: number | null | undefined, sortBy?: SortBy | undefined, sortDirection?: SortDirection | undefined): Promise<GetProductsResult> {
         let url_ = this.baseUrl + "/products?";
         if (query === null)
             throw new Error("The parameter 'query' cannot be null.");
@@ -545,11 +545,11 @@ export class ProductsControllerClient implements IProductsControllerClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processListAll(_response);
+            return this.processGetProducts(_response);
         });
     }
 
-    protected processListAll(response: Response): Promise<GetProductsResult> {
+    protected processGetProducts(response: Response): Promise<GetProductsResult> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -801,13 +801,6 @@ export class WarehouseControllerClient implements IWarehouseControllerClient {
             let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result400 = BadRequestHttpProblem.fromJS(resultData400);
             return throwException("An HttpProblem response used when the request is malformed.", status, _responseText, _headers, result400);
-            });
-        } else if (status === 404) {
-            return response.text().then((_responseText) => {
-            let result404: any = null;
-            let resultData404 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result404 = HttpProblemResponse.fromJS(resultData404);
-            return throwException("No inventory for the specified product", status, _responseText, _headers, result404);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -1323,6 +1316,82 @@ export interface INewUser {
     password: string;
 }
 
+export class GetProductsOptions implements IGetProductsOptions {
+    /** A short text to search for in either the title, description or category. */
+    query?: string;
+    category?: GetProductsOptionsCategory;
+    count?: number;
+    offset?: number | undefined;
+    sortBy?: GetProductsOptionsSortBy;
+    sortDirection?: GetProductsOptionsSortDirection;
+
+    [key: string]: any;
+
+    constructor(data?: IGetProductsOptions) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.count = 10;
+            this.offset = 0;
+            this.sortBy = GetProductsOptionsSortBy.Id;
+            this.sortDirection = GetProductsOptionsSortDirection.Asc;
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.query = _data["query"];
+            this.category = _data["category"];
+            this.count = _data["count"] !== undefined ? _data["count"] : 10;
+            this.offset = _data["offset"] !== undefined ? _data["offset"] : 0;
+            this.sortBy = _data["sortBy"] !== undefined ? _data["sortBy"] : GetProductsOptionsSortBy.Id;
+            this.sortDirection = _data["sortDirection"] !== undefined ? _data["sortDirection"] : GetProductsOptionsSortDirection.Asc;
+        }
+    }
+
+    static fromJS(data: any): GetProductsOptions {
+        data = typeof data === 'object' ? data : {};
+        let result = new GetProductsOptions();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["query"] = this.query;
+        data["category"] = this.category;
+        data["count"] = this.count;
+        data["offset"] = this.offset;
+        data["sortBy"] = this.sortBy;
+        data["sortDirection"] = this.sortDirection;
+        return data;
+    }
+}
+
+export interface IGetProductsOptions {
+    /** A short text to search for in either the title, description or category. */
+    query?: string;
+    category?: GetProductsOptionsCategory;
+    count?: number;
+    offset?: number | undefined;
+    sortBy?: GetProductsOptionsSortBy;
+    sortDirection?: GetProductsOptionsSortDirection;
+
+    [key: string]: any;
+}
+
 export class GetProductsResult implements IGetProductsResult {
     results!: Results[];
     /** The total number of results regardless of paging */
@@ -1820,6 +1889,12 @@ export interface IUser2 {
 export type UserRole = "admin" | "productAdmin" | "warehouseAdmin";
 
 export type NewUserRole = "admin" | "productAdmin" | "warehouseAdmin";
+
+export type GetProductsOptionsCategory = "electronics" | "clothing" | "home decor" | "beauty" | "sports";
+
+export type GetProductsOptionsSortBy = "id" | "title" | "price" | "rating" | "nrOfRatings";
+
+export type GetProductsOptionsSortDirection = "asc" | "desc";
 
 export class Results implements IResults {
     /** The unique ID for the product (format not guaranteed) */

@@ -10,9 +10,13 @@ export const Login = () => {
 		mutate({ username, password })
 	}
 
+	const onCancel = () => {
+		console.log("cancelled login")
+	}
+
 	return (
 		<ProvideFieldsService disabled={isPending}>
-			<LoginForm onLogin={onLogin} />
+			<LoginForm onLogin={onLogin} onCancel={onCancel} />
 		</ProvideFieldsService>
 	)
 }
