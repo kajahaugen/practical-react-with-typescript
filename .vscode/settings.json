@@ -6,7 +6,7 @@
 	"editor.tabSize": 2,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true
+		"source.fixAll.eslint": "explicit"
 	},
 	"workbench.iconTheme": "vscode-icons",
 	"typescript.tsdk": "node_modules\\typescript\\lib",
